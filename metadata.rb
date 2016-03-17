@@ -4,7 +4,7 @@ maintainer_email 'jbellone@bloomberg.net'
 license 'Apache 2.0'
 description 'Library cookbook which installs and configures rubyzip.'
 long_description 'Library cookbook which installs and configures rubyzip.'
-version '1.0.0'
+version '1.1.0'
 
 supports 'centos'
 supports 'redhat'
