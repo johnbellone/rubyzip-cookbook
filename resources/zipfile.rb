@@ -8,6 +8,7 @@
 #
 require 'find'
 
+resource_name :zipfile
 property :path, String, name_property: true
 property :source, String
 property :overwrite, [TrueClass, FalseClass], default: false
