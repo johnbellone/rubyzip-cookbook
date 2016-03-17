@@ -82,7 +82,7 @@ def cached_file
       else
         cache_file_path = source
       end
-      path.gsub(::File::SEPARATOR, ::File::ALT_SEPARATOR || '\\') if node.platform?('windows')
-      path
+      cached_file_path.gsub!(::File::SEPARATOR, ::File::ALT_SEPARATOR || '\\') if node.platform?('windows')
+      cached_file_path
     end
 end
