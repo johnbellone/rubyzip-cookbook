@@ -19,7 +19,7 @@ action :unzip do
 
   Chef::Log.debug("unzip #{new_resource.source} => #{new_resource.path} (overwrite=#{new_resource.overwrite})")
 
-  Zip::File.open(cached_file(new_resource.source, new_resource.checksum)) do |zip|
+  Zip::File.open(new_resource.cached_file) do |zip|
     zip.each do |entry|
       path = ::File.join(new_resource.path, entry.name)
       FileUtils.mkdir_p(::File.dirname(path))
@@ -67,11 +67,7 @@ action :zip do
   end
 end
 
-def self.win_friendly_path(path)
-  path.gsub(::File::SEPARATOR, ::File::ALT_SEPARATOR || '\\') if path
-end
-
-def self.cached_file(source, checksum = nil, windows_path = true)
+def cached_file
   @installer_file_path ||=
     begin
       if source =~ /^(file|ftp|http|https):\/\//
@@ -86,6 +82,6 @@ def self.cached_file(source, checksum = nil, windows_path = true)
       else
         cache_file_path = source
       end
-      windows_path ? win_friendly_path(cache_file_path) : cache_file_path
+      path.gsub(::File::SEPARATOR, ::File::ALT_SEPARATOR || '\\')
     end
 end
