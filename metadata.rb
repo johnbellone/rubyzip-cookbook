@@ -14,5 +14,7 @@ supports 'freebsd'
 supports 'arch'
 supports 'windows'
 
+depends 'compat_resource', '~> 12.0'
+
 source_url 'https://github.com/johnbellone/rubyzip-cookbook' if respond_to?(:source_url)
 issues_url 'https://github.com/johnbellone/rubyzip-cookbook/issues' if respond_to?(:issues_url)
