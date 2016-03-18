@@ -12,6 +12,8 @@ module RubyzipCookbook
 
     resource_name :zipfile
     property :path, String, name_property: true
+    property :files_owner, String
+    property :files_group, String
     property :source, String
     property :overwrite, [TrueClass, FalseClass], default: false
     property :checksum, String
@@ -29,6 +31,7 @@ module RubyzipCookbook
             FileUtils.rm(path)
           end
           zip.extract(entry, path)
+          FileUtils.chown(new_resource.files_owner, new_resource.files_group, path)
         end
       end
       new_resource.updated_by_last_action(true)
