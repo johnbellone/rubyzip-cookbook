@@ -19,7 +19,7 @@ module RubyzipCookbook
     property :checksum, String
 
     action :unzip do
-      include_recipe 'rubyzip::default'
+      run_context.include_recipe 'rubyzip::default'
 
       Chef::Log.debug("unzip #{new_resource.source} => #{new_resource.path} (overwrite=#{new_resource.overwrite})")
 
@@ -38,7 +38,7 @@ module RubyzipCookbook
     end
 
     action :zip do
-      include_recipe 'rubyzip::default'
+      run_context.include_recipe 'rubyzip::default'
 
       new_resource.source.downcase.gsub!(::File::SEPARATOR, ::File::ALT_SEPARATOR)
       new_resource.path.downcase.gsub!(::File::SEPARATOR, ::File::ALT_SEPARATOR)
